@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ひなた☀️ デートアプリ（フル版）</title>
+<style>
+  body { font-family: sans-serif; margin:10px; background:#fffbe6; }
+  h1,h2 { color:#ff8c00; }
+  label { display:block; margin-top:10px; }
+  input[type=text], select, textarea { width:100%; padding:5px; margin-top:3px; }
+  .section { border:1px solid #ffd700; padding:10px; margin:10px 0; border-radius:8px; background:#fff8e1; }
+  .button { background:#ff8c00; color:white; padding:10px; border:none; border-radius:5px; margin-top:10px; width:100%; font-size:16px; }
+  .hobby-group label { display:inline-block; margin-right:10px; }
+  .sun { font-size:24px; cursor:pointer; }
+  #chat, #date-suggestion { border:1px solid #ff8c00; padding:5px; margin-top:10px; height:150px; overflow-y:auto; background:#fffde7; }
+  #message { width:80%; display:inline-block; }
+  #send { width:18%; display:inline-block; }
+</style>
+</head>
+<body>
+
+<h1>ひなた☀️ デートアプリ（フル版）</h1>
+
+<div id="profile-section" class="section">
+<h2>プロフィール入力</h2>
+
+<label>ニックネーム：
+<input type="text" id="nickname">
+</label>
+
+<label>居住地：
+<select id="residence"></select>
+</label>
+
+<label>現在の生活：
+<select id="living">
+  <option value="">選択してください</option>
+  <option value="1人暮らし">1人暮らし</option>
+  <option value="実家暮らし">実家暮らし</option>
+  <option value="その他">その他</option>
+</select>
+</label>
+<label id="living-other-label" style="display:none;">その他（自由記入）：
+<input type="text" id="living-other">
+</label>
+
+<label>出身地：
+<select id="birthplace"></select>
+</label>
+
+<label>結婚願望：
+<select id="marriage">
+  <option value="">選択してください</option>
+  <option value="すぐにしたい">すぐにしたい</option>
+  <option value="2〜3年以内">2〜3年以内</option>
+  <option value="いつかしたい">いつかしたい</option>
+  <option value="事実婚希望">事実婚希望</option>
+  <option value="したくない">したくない</option>
+</select>
+</label>
+
+<label>子供が欲しいか：
+<select id="children">
+  <option value="">選択してください</option>
+  <option value="欲しい">欲しい</option>
+  <option value="欲しくない">欲しくない</option>
+  <option value="相手による">相手による</option>
+</select>
+</label>
+
+<label>身長：
+<select id="height">
+  <option value="">選択してください</option>
+  <option value="145以下">145以下</option>
+  <option value="145〜150">145〜150</option>
+  <option value="151〜156">151〜156</option>
+  <option value="159〜164">159〜164</option>
+  <option value="165〜170">165〜170</option>
+  <option value="171〜176">171〜176</option>
+  <option value="177以上">177以上</option>
+</select>
+</label>
+
+<label>体型：
+<select id="body">
+  <option value="">選択してください</option>
+  <option value="ぽっちゃり">ぽっちゃり</option>
+  <option value="がっちり">がっちり</option>
+  <option value="ややぽちゃ">ややぽちゃ</option>
+  <option value="普通">普通</option>
+  <option value="やや細め">やや細め</option>
+  <option value="細め">細め</option>
+  <option value="非公開">非公開</option>
+  <option value="その他">その他</option>
+</select>
+</label>
+<label id="body-other-label" style="display:none;">その他（自由記入）：
+<input type="text" id="body-other">
+</label>
+
+<label>趣味（複数選択可）</label>
+<div class="hobby-group">
+<strong>スポーツ🏀</strong>
+<label><input type="checkbox" value="野球">野球</label>
+<label><input type="checkbox" value="サッカー">サッカー</label>
+<label><input type="checkbox" value="バスケ">バスケ</label>
+<label><input type="checkbox" value="ダンス">ダンス</label>
+<label><input type="checkbox" value="ジム">ジム</label>
+<label><input type="checkbox" value="筋トレ">筋トレ</label>
+</div>
+
+<div class="hobby-group">
+<strong>文化🎨</strong>
+<label><input type="checkbox" value="旅行">旅行</label>
+<label><input type="checkbox" value="写真">写真</label>
+<label><input type="checkbox" value="カフェ巡り">カフェ巡り</label>
+<label><input type="checkbox" value="美術">美術</label>
+<label><input type="checkbox" value="アニメ">アニメ</label>
+<label><input type="checkbox" value="料理">料理</label>
+<label><input type="checkbox" value="DIY">DIY</label>
+<label><input type="checkbox" value="手芸">手芸</label>
+<label><input type="checkbox" value="ハイキング">ハイキング</label>
+<label><input type="checkbox" value="自転車">自転車</label>
+</div>
+
+<div class="hobby-group">
+<strong>娯楽🎶</strong>
+<label><input type="checkbox" value="映画鑑賞">映画鑑賞</label>
+<label><input type="checkbox" value="音楽鑑賞">音楽鑑賞</label>
+<label><input type="checkbox" value="ボードゲーム">ボードゲーム</label>
+<label><input type="checkbox" value="ヨガ">ヨガ</label>
+<label><input type="checkbox" value="水泳">水泳</label>
+<label><input type="checkbox" value="陶芸">陶芸</label>
+<label><input type="checkbox" value="ガーデニング">ガーデニング</label>
+<label><input type="checkbox" value="登山">登山</label>
+<label><input type="checkbox" value="ランニング">ランニング</label>
+<label><input type="checkbox" value="温泉">温泉</label>
+<label><input type="checkbox" value="サウナ">サウナ</label>
+<label><input type="checkbox" value="半身浴">半身浴</label>
+</div>
+
+<label>ギャンブル：
+<select id="gamble">
+  <option value="">選択してください</option>
+  <option value="やらない">やらない</option>
+  <option value="やる">やる</option>
+</select>
+</label>
+
+<label>借金：
+<select id="debt">
+  <option value="">選択してください</option>
+  <option value="なし">なし</option>
+  <option value="あり">あり</option>
+</select>
+</label>
+
+<label>お酒：
+<select id="alcohol">
+  <option value="">選択してください</option>
+  <option value="毎日">毎日</option>
+  <option value="しばしば">しばしば</option>
+  <option value="時々">時々</option>
+  <option value="ほとんど飲まない">ほとんど飲まない</option>
+  <option value="飲まない">飲まない</option>
+</select>
+</label>
+
+<label>たばこ：
+<select id="smoke">
+  <option value="">選択してください</option>
+  <option value="吸う">吸う</option>
+  <option value="時々吸う">時々吸う</option>
+  <option value="非喫煙者の前では吸わない">非喫煙者の前では吸わない</option>
+  <option value="吸わない">吸わない</option>
+</select>
+</label>
+
+<label>プロフィール自由記載：
+<textarea id="profile-text" rows="3"></textarea>
+</label>
+
+<button class="button" id="saveProfile">プロフィール保存</button>
+</div>
+
+<div id="chat-section" class="section" style="display:none;">
+<h2>チャット</h2>
+<div id="chat"></div>
+<input type="text" id="message" placeholder="メッセージ入力">
+<button id="send">送信</button>
+
+<h2>☀️デート評価</h2>
+<label>楽しさ評価：</label>
+<span class="sun" data-value="1">☀️</span>
+<span class="sun" data-value="2">☀️</span>
+<span class="sun" data-value="3">☀️</span>
+<span class="sun" data-value="4">☀️</span>
+<span class="sun" data-value="5">☀️</span>
+<div id="rating-result"></div>
+
+<h2>AIひなた☀️からの次デート提案</h2>
+<div id="date-suggestion"></div>
+</div>
+
+<script>
+// 都道府県＋海外
+const prefectures = ["北海道","青森","岩手","宮城","秋田","山形","福島","茨城","栃木","群馬","埼玉","千葉","東京","神奈川","新潟","富山","石川","福井","山梨","長野","岐阜","静岡","愛知","三重","滋賀","京都","大阪","兵庫","奈良","和歌山","鳥取","島根","岡山","広島","山口","徳島","香川","愛媛","高知","福岡","佐賀","長崎","熊本","大分","宮崎","鹿児島","沖縄","海外"];
+const residenceSelect = document.getElementById('residence');
+const birthplaceSelect = document.getElementById('birthplace');
+prefectures.forEach(p=>{
+  const opt1=document.createElement('option'); opt1.value=p; opt1.textContent=p; residenceSelect.appendChild(opt1);
+  const opt2=document.createElement('option'); opt2.value=p; opt2.textContent=p; birthplaceSelect.appendChild(opt2);
+});
+
+// 自由記入表示
+const livingSelect = document.getElementById('living');
+const livingOtherLabel = document.getElementById('living-other-label');
+livingSelect.addEventListener('change',()=>{livingOtherLabel.style.display = livingSelect.value==='その他'?'block':'none';});
+
+const bodySelect = document.getElementById('body');
+const bodyOtherLabel = document.getElementById('body-other-label');
+bodySelect.addEventListener('change',()=>{bodyOtherLabel.style.display = bodySelect.value==='その他'?'block':'none';});
+
+// プロフィール保存
+document.getElementById('saveProfile').addEventListener('click',()=>{
+  alert('プロフィール保存しました！');
+  document.getElementById('profile-section').style.display='none';
+  document.getElementById('chat-section').style.display='block';
+});
+
+// 簡易チャット
+const chatDiv = document.getElementById('chat');
+const messageInput = document.getElementById('message');
+document.getElementById('send').addEventListener('click',()=>{
+  if(messageInput.value.trim()==='') return;
+  const p=document.createElement('p'); p.textContent=document.getElementById('nickname').value+'：'+messageInput.value;
+  chatDiv.appendChild(p); messageInput.value=''; chatDiv.scrollTop=chatDiv.scrollHeight;
+});
+
+// デート評価
+const suns=document.querySelectorAll('.sun'); let rating=0;
+suns.forEach(s=>{
+  s.addEventListener('click',()=>{
+    rating=s.dataset.value;
+    document.getElementById('rating-result').textContent='評価：'+rating+'☀️';
+    // AIひなたによる簡易提案
+    let suggestion='次のデートは映画やカフェがおすすめです🍰🎬';
+    document.getElementById('date-suggestion').textContent=suggestion;
+  });
+});
+</script>
+
+</body>
+</html>
