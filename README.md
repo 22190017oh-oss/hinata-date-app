@@ -1,0 +1,2 @@
+# hinata-date-app
+ひなた
